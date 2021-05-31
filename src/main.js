@@ -36,3 +36,4 @@ new Vue({
     render: h => h(App),
     router: router,
 }).$mount('#app')
+Vue.config.devtools = true

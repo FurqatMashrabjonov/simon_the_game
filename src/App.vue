@@ -2,6 +2,11 @@
   <div id="app">
     <div class="container">
       <h2>SIMON THE GAME</h2>
+      <select v-model="difficult_time">
+        <option value="1400">Easy</option>
+        <option value="1000">Normal</option>
+        <option value="400">Hard</option>
+      </select>
       <div class="simon">
         <div class="pad red" @click="clicked(1)" :class="{ active: isActive === 1 }"></div>
         <div class="pad green" @click="clicked(2)" :class="{ active: isActive === 2 }"></div>
@@ -29,11 +34,18 @@ export default {
       isActive: 0,
       next: 0,
       message: "",
-      is_reply: false
+      is_reply: false,
+      difficult_time:null
     }
   },
   created() {
+    if (this.difficult_time != null)
     this.generate()
+  },
+  watch: {
+    difficult_time(){
+      this.generate()
+    }
   },
   methods: {
     generate() {
@@ -59,7 +71,7 @@ export default {
           clearInterval(interval1)
           this.isActive = 0
         }
-      }, 1000)
+      }, this.difficult_time)
     },
 
     clicked(number) {
